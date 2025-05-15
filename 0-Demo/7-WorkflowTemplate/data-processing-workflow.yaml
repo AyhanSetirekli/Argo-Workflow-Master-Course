@@ -3,6 +3,18 @@ kind: Workflow
 metadata:
   generateName: data-processing-workflow-
 spec:
+  # pod garbage collection
+  podGC:
+    strategy: OnWorkflowSuccess # delete pods after wf succeeds and leave behind on failures
+  # avoid running pods as root user (default)
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 8737 # any non-root user
+  # retry pods that were deleted (e.g. due to node draining, accidental deletion etc)
+  retryStrategy:
+    retryPolicy: OnError
+    limit: 1
+
   entrypoint: process-data
   arguments:
     parameters:
