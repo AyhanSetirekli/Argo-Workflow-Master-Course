@@ -2,6 +2,10 @@ kubectl proxy
 
 http://localhost:8001/api/v1/namespaces/argo/services/minio:9001/proxy/
 
+OR
+ad && kubectl -n argo port-forward service/minio 9001:9001
+http://localhost:9001
+
 admin/password
 
 kubectl get secret my-minio-cred --namespace argo -o jsonpath="{.data.accesskey}"|base64 --decode
