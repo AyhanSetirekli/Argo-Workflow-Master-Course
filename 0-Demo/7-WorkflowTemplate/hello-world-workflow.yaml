@@ -5,9 +5,9 @@ metadata:
 spec:
   entrypoint: use-hello-world-template
   templates:
-  - name: use-hello-world-template
-    steps:
-    - - name: invoke-hello-world-template
-        templateRef:
-          name: hello-world-template
-          template: hello-world
+    - name: use-hello-world-template
+      steps:
+        - - name: invoke-hello-world-template
+            templateRef:
+              name: hello-world-template
+              template: hello-world
