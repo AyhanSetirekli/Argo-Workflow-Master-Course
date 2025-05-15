@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: global-and-local-params-
+spec:
+  entrypoint: use-global-param
+  arguments:
+    parameters:
+      - name: global-param
+        value: Hello from Global Parameter
+
+  templates:
+    - name: use-global-param
+      steps:
+        - - name: first-step
+            template: print-global-param
+            arguments:
+              parameters:
+                - name: global-param
+                  value: "{{ workflow.parameters.global-param }}"
+        - - name: second-step
+            template: print-global-param
+            arguments:
+              parameters:
+                - name: global-param
+                  value: Hello from the Overriden Global Parameter
+        - - name: third-step
+            template: print-local-param
+
+    - name: print-global-param
+      inputs:
+        parameters:
+          - name: global-param
+      container:
+        image: alpine:latest
+        command: [echo, "{{ inputs.parameters.global-param }}"]
+
+    - name: print-local-param
+      inputs:
+        parameters:
+          - name: local-param
+            value: Hello from Local Parameter
+      container:
+        image: alpine:latest
+        command: [echo, "{{ inputs.parameters.local-param }}"]
