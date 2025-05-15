@@ -23,7 +23,7 @@ spec:
             arguments:
               parameters:
                 - name: global-param
-                  value: Hello from the Overriden Global Parameter
+                  value: Hello from Overriden Global Parameter
         - - name: third-step
             template: print-local-param
 
