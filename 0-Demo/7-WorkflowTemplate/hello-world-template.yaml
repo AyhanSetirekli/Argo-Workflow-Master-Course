@@ -3,6 +3,7 @@ kind: WorkflowTemplate
 metadata:
   name: hello-world-template
 spec:
+  entrypoint: hello-world
   templates:
     - name: hello-world
       container:
