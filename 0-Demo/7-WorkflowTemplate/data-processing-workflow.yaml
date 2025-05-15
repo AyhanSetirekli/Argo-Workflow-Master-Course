@@ -3,6 +3,11 @@ kind: Workflow
 metadata:
   generateName: data-processing-workflow-
 spec:
+  # must complete in 8h (28,800 seconds)
+  activeDeadlineSeconds: 28800
+  # keep workflows for 1d (86,400 seconds)
+  ttlStrategy:
+    secondsAfterCompletion: 86400
   # pod garbage collection
   podGC:
     strategy: OnWorkflowSuccess # delete pods after wf succeeds and leave behind on failures
