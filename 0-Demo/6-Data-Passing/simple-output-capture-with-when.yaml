@@ -19,7 +19,7 @@ spec:
                   value: "{{steps.generate-output.outputs.parameters.hello-output}}"
         - - name: conditional-output
             template: output-consumer
-            when: "'{{steps.generate-output.outputs.parameters.hello-output}}' == 'Hello, World'"
+            when: "{{steps.generate-output.outputs.parameters.hello-output}} == 'Hello, World'"
             arguments:
               parameters:
                 - name: captured-output
