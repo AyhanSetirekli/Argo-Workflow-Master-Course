@@ -5,7 +5,7 @@ metadata:
 spec:
   # must complete in 8h (28,800 seconds)
   activeDeadlineSeconds: 28800
-  # keep workflows for 1d (86,400 seconds)
+  # keep workflows for 1d (86,400 seconds) i.e. delete workflows after 1 day
   ttlStrategy:
     secondsAfterCompletion: 86400
   # pod garbage collection
