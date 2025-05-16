@@ -42,4 +42,5 @@ spec:
         image: alpine:latest
         command: [sh]
         source: |
-          echo "Message from previous step: \n{{inputs.parameters.message}}"
+          echo "Message from previous step:"
+          echo "{{inputs.parameters.message}}"
