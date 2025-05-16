@@ -4,9 +4,9 @@ metadata:
   name: argo-workflows-access-binding
   namespace: argo
 subjects:
-- kind: ServiceAccount
-  name: jenkins
-  namespace: default
+  - kind: ServiceAccount
+    name: jenkins
+    namespace: default
 roleRef:
   kind: Role
   name: argo-workflows-access

@@ -9,22 +9,22 @@ kubectl get all -n argo
 ad && kubectl -n argo port-forward deployment/argo-server 2746:2746
 https://localhost:2746
 
-kubectl create sa jenkins
+kubectl apply -f service-account-jenkins.yaml
 
 kubectl apply -f argo-workflows-clusterrole.yaml
 kubectl apply -f argo-workflows-clusterrolebinding.yaml
 
 kubectl apply -f argo-workflows-secret.yaml
 
-ARGO_TOKEN="Bearer $(kubectl get secret jenkins.service-account-token -o=jsonpath='{.data.token}' | base64 --decode)"
+ARGO_TOKEN="Bearer $(kubectl get secret jenkins.service-account-token -n default -o=jsonpath='{.data.token}' | base64 --decode)"
 echo $ARGO_TOKEN
 
 
-argo submit basic-dag-workflow.yaml
+argo submit basic-dag-workflow.yaml --watch
 
-argo submit basic-dag-workflow.yaml --serviceaccount jenkins
+argo submit basic-dag-workflow.yaml --serviceaccount jenkins --watch
 
-argo submit basic-dag-workflow.yaml --serviceaccount jenkins -n argo
+argo submit basic-dag-workflow.yaml --serviceaccount jenkins -n argo --watch
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
