@@ -40,6 +40,7 @@ KUBECONFIG=/dev/null
 ARGO_NAMESPACE=sandbox
 
 kubectl delete secret $SECRET
+kubectl delete pods --field-selector=status.phase=Succeeded
 
 kubectl apply -f argo-workflows-role.yaml
 kubectl apply -f argo-workflows-rolebinding.yaml
